@@ -21,12 +21,17 @@ public class CarDataInit {
     @PostConstruct
     public void addCars(){
         final List<Car> carsList = createCarsList();
+        final Car car = new Car();
+        car.setModel("Toyota");
+        car.setMake("Corolla");
+        car.setYear(2000);
+        car.setMileage(125000);
+        carsList.add(car);
+
         carService.addCars(carsList);
     }
 
     private List<Car> createCarsList(){
-        List<Car> cars = new ArrayList<>();
-
-        return cars;
+        return new ArrayList<>();
     }
 }
