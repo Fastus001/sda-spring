@@ -16,11 +16,11 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Controller
+@RestController
 @RequestMapping("/api/cars")
 public class CarController {
 
     private final CarService carService;
-
 
     @GetMapping
     public @ResponseBody List<Car> getCars() {
