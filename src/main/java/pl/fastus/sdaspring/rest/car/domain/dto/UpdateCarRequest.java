@@ -1,13 +1,16 @@
 package pl.fastus.sdaspring.rest.car.domain.dto;
 
-import lombok.Value;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Created by Tom - 11.04.2021
  */
-@Value
+@Setter
+@Getter
+@NoArgsConstructor
 public class UpdateCarRequest {
 
-    Long id;
-    Integer mileage;
+    private Integer mileage;
 }

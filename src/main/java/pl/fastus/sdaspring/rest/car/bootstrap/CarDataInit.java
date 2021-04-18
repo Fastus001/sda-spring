@@ -32,6 +32,7 @@ public class CarDataInit {
     }
 
     private List<Car> createCarsList(){
-        return new ArrayList<>();
+        List<Car> cars = new ArrayList<>();
+        return cars;
     }
 }

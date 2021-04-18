@@ -1,9 +1,9 @@
 package pl.fastus.sdaspring.rest.car.services;
 
 import org.springframework.stereotype.Service;
+import pl.fastus.sdaspring.rest.car.domain.Car;
 import pl.fastus.sdaspring.rest.car.domain.dto.CreateCarRequest;
 import pl.fastus.sdaspring.rest.car.domain.dto.UpdateCarRequest;
-import pl.fastus.sdaspring.rest.car.domain.Car;
 import pl.fastus.sdaspring.rest.car.repositories.CarRepository;
 
 import java.util.List;
@@ -22,13 +22,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void addCar(CreateCarRequest request) {
+    public Car addCar(CreateCarRequest request) {
         final Car carToSave = new Car();
         carToSave.setMake(request.getMake());
         carToSave.setModel(request.getModel());
         carToSave.setYear(request.getYear());
         carToSave.setMileage(request.getMileage());
-        carRepository.save(carToSave);
+        return carRepository.save(carToSave);
     }
 
     @Override
@@ -47,8 +47,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(UpdateCarRequest request) {
-        final Optional<Car> optionalCar = carRepository.findById(request.getId());
+//    @Transactional
+    public void updateCar(Long id, UpdateCarRequest request) {
+        final Optional<Car> optionalCar = carRepository.findById(id);
         if(optionalCar.isEmpty()){
             throw new IllegalArgumentException("No item with given ID!");
         }

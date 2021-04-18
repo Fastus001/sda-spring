@@ -2,6 +2,8 @@ package pl.fastus.sdaspring.rest.car.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.fastus.sdaspring.rest.car.domain.Car;
@@ -32,18 +34,30 @@ public class CarController {
         return carService.getCar(id);
     }
     
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void addCar(@RequestBody CreateCarRequest carRequest){
+//        System.out.println("car = " + carRequest);
+//        carService.addCar(carRequest);
+//    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCar(@RequestBody CreateCarRequest carRequest){
+    public ResponseEntity<Car> addCar(@RequestBody CreateCarRequest carRequest){
         System.out.println("car = " + carRequest);
-        carService.addCar(carRequest);
+        final Car savedCar = carService.addCar(carRequest);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("custom", "Custom header")
+                .body(savedCar);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) /*when there is not body response*/
-    public void updateCar(@RequestBody UpdateCarRequest request){
+    public void updateCar(@PathVariable Long id, @RequestBody UpdateCarRequest request){
         System.out.println("request = " + request);
-        carService.updateCar(request);
+        carService.updateCar(id, request);
     }
 
     @DeleteMapping("/{id}")

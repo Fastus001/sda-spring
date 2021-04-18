@@ -1,8 +1,8 @@
 package pl.fastus.sdaspring.rest.car.services;
 
+import pl.fastus.sdaspring.rest.car.domain.Car;
 import pl.fastus.sdaspring.rest.car.domain.dto.CreateCarRequest;
 import pl.fastus.sdaspring.rest.car.domain.dto.UpdateCarRequest;
-import pl.fastus.sdaspring.rest.car.domain.Car;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface CarService {
 
-    void addCar(CreateCarRequest request);
+    Car addCar(CreateCarRequest request);
 
     void addCars(List<Car> cars);
 
@@ -19,7 +19,7 @@ public interface CarService {
 
     Car getCar(Long id);
 
-    void updateCar(UpdateCarRequest request);
+    void updateCar(Long id, UpdateCarRequest request);
 
     void deleteCarById(Long id);
 }
